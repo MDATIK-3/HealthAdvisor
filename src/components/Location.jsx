@@ -8,26 +8,21 @@ const Location = ({ setHealthAdvice, healthAdvice }) => {
   useEffect(() => {
     const fetchLocation = () => {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            fetch(
-              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-            )
-              .then((response) => response.json())
-              .then((data) => {
-                const country = data.countryName;
-                setLocation(`${data.city}, ${country}`);
-                getHealthAdvice(country);
-              })
-              .catch(() => {
-                setError("Error fetching location data.");
-              });
-          },
-          () => {
-            setError("Unable to retrieve your location.");
-          }
-        );
+        navigator.geolocation.getCurrentPosition((position) => {
+          const { latitude, longitude } = position.coords;
+          fetch(
+            `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const country = data.countryName;
+              setLocation(`${data.city}, ${country}`);
+              getHealthAdvice(country);
+            })
+            .catch(() => {
+              setError("Error fetching location data.");
+            });
+        });
       } else {
         setError("Geolocation is not supported by this browser.");
       }
