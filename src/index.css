@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-100 font-sans leading-normal tracking-normal;
+}
+
+.App-header {
+  @apply bg-blue-500 text-white p-4;
+}
+.custom-focus:focus {
+  border-color: rgba(106, 168, 234, 0.93);
+  box-shadow: 0 0 0 .5px rgba(106, 168, 234, 0.93);
+}
